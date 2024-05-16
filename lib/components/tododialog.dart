@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model/todo.dart';
+import '../services/colorgenerator.dart';
 import '../services/todocontroller.dart';
 
 class TodoDialog extends StatelessWidget {
@@ -39,9 +40,8 @@ class TodoDialog extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                context
-                    .read<TodoController>()
-                    .addTodo(Todo(title: _todoCtrl.text));
+                context.read<TodoController>().addTodo(Todo(
+                    title: _todoCtrl.text, color: generateRandomLightColor()));
                 Navigator.of(context).pop();
               },
               child: const Text('Add'),

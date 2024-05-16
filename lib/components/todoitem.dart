@@ -10,16 +10,20 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(todo.title),
-        trailing: Checkbox(
-          value: todo.isDone,
-          onChanged: (value) {
-            context.read<TodoController>().completeTodo(todo.id);
-          },
-        ),
-      ),
-    );
+    return Dismissible(
+        key: UniqueKey(),
+        onDismissed: (direction) =>
+            context.read<TodoController>().deleteTodo(todo.id),
+        child: Card(
+          color: todo.color,
+          child: ListTile(
+            onTap: () => context.read<TodoController>().completeTodo(todo),
+            title: Text(todo.title),
+            trailing: Checkbox(
+              value: todo.isDone,
+              onChanged: null,
+            ),
+          ),
+        ));
   }
 }

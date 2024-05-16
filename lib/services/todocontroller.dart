@@ -11,13 +11,14 @@ class TodoController extends ChangeNotifier {
     notifyListeners();
   }
 
-  completeTodo(int id) {
-    _todos[id].isDone = !_todos[id].isDone;
+  completeTodo(Todo todo) {
+    final element = _todos.where((element) => element.id == todo.id).first;
+    element.isDone = !element.isDone;
     notifyListeners();
   }
 
   deleteTodo(int id) {
-    _todos.removeAt(id);
+    _todos.removeWhere((element) => element.id == id);
     notifyListeners();
   }
 }
